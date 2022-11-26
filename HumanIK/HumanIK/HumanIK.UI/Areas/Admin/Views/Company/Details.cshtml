@@ -1,0 +1,86 @@
+﻿@*---Admin/Company---*@
+
+@model HumanIK.ENTITIES.Entities.Company
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">@Model.Name.ToTitleCase() Detayları</h1>
+    <a class="btn btn-outline-dark ml-auto h-50 align-self-center" asp-action="List" style="margin-right:70px;">Tüm Şirketler</a>
+</div>
+<div class="col-md-9 col-sm-12 mt-5 mr-5">
+    <div class="col-12 d-flex flex-wrap justify-content-center">
+        <div class="d-flex col-lg-5 flex-wrap justify-content-center">
+            <div class="profile-photo-container">
+                <div class="profile-photo" style="background-image: url(@Model.Logo); "></div>
+            </div>
+        </div>
+        <div class="card col-lg-7 justify-content-center">
+            <div class="card-body">
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="Name" class="col-4"></label>
+                    <span class="col-6">@Model.Name.ToTitleCase()</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="Title" class="col-4"></label>
+                    <span class="col-6">@Model.Title</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="TaxAdministration" class="col-4"></label>
+                    <span class="col-6">@Model.TaxAdministration.ToTitleCase()</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="TaxNo" class="col-4"></label>
+                    <span class="col-6">@Model.TaxNo.ToTitleCase()</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="MersisNo" class="col-4"></label>
+                    <span class="col-6">@Model.MersisNo.ToTitleCase()</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="Founded" class="col-4"></label>
+                    <span class="col-6">@Model.Founded.ToShortDateString()</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="DealStartDate" class="col-4"></label>
+                    <span class="col-6">@Model.DealStartDate.ToShortDateString()</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="DealEndDate" class="col-4"></label>
+                    <span class="col-6">@Model.DealEndDate.ToShortDateString()</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="Address" class="col-4"></label>
+                    <span class="col-6">@Model.Address</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="NumberOfEmployees" class="col-4"></label>
+                    <span class="col-6">@Model.NumberOfEmployees</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="PhoneNumber" class="col-4"></label>
+                    <span class="col-6">@Model.PhoneNumber</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="Email" class="col-4"></label>
+                    <span class="col-6">@Model.Email</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="Sector" class="col-4"></label>
+                    <span class="col-6">@Model.Sector</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="DealStatus" class="col-4"></label>
+                    <span class="col-6">@Model.DealStatus</span>
+                </div>
+                <div class="detail-item d-flex border-bottom ">
+                    <label asp-for="Status" class="col-4"></label>
+                    <span class="col-6">@Model.Status</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

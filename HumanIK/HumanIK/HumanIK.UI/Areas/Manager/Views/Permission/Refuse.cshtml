@@ -1,0 +1,65 @@
+﻿@*---Manager/Permission---*@
+@model Permission
+
+@{
+
+    ViewData["Title"] = "İzin Talebini Reddet";
+}
+
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">İzin Talebini Reddet</h1>
+    <input type="submit" form="form" value="Reddet" class="btn btn-outline-danger ml-auto h-50 align-self-center px-5" />
+</div>
+<div class="row col-md-8 col-sm-12 d-flex justify-content-center m-auto p-1">
+    <form enctype="multipart/form-data" id="form" class="d-flex flex-wrap col-md-6 col-sm-12" asp-action="ConfirmRefusing" method="post">
+        <input type="hidden" asp-for="ID" />
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label asp-for="DemandOwner" class="control-label"></label>
+                <p>@ViewBag.DemandOwner</p>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermissionType" class="control-label"></label>
+                <p>@Model.PermissionType.GetDisplayName()</p>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfDays" class="control-label"></label>
+                <p>@Model.NumberOfDays</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <p>@Model.StartDate.ToShortDateString()</p>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <p>@Model.EndDate.ToShortDateString()</p>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <p>@Model.CreateDate</p>
+            </div>
+        </div>
+        <div class="form-group col-12">
+            <label asp-for="ReasonOfRejection" class="control-label"></label>
+            <textarea asp-for="ReasonOfRejection" rows="3" class="form-control">@Model.CreateDate</textarea>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/lib/jquery.mask.js"></script>
+    <script>
+        document.getElementById("amount").addEventListener("keypress", (e) => {
+            if (isNaN(e.key)) {
+                e.preventDefault();
+            }
+        })
+
+    </script>
+}

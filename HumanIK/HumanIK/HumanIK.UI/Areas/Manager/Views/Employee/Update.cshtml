@@ -1,0 +1,142 @@
+﻿@*---Manager/Employee---*@
+@using HumanIK.BUSINESS.Abstract
+@model HumanIK.UI.Areas.Manager.Models.EmployeeViewModel
+@inject IGenericService<Company> _companyService
+
+@{
+    ViewData["Title"] = "Personel Güncelle";
+    List<Company> companyList = _companyService.GetAll();
+}
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">Personel Güncelle</h1>
+    <input type="submit" form="form" value="Güncelle" class="btn btn-outline-warning ml-auto h-50 align-self-center px-5" />
+</div>
+<div class="row col-md-8 col-sm-12  d-flex justify-content-center m-auto p-1">
+    <form id="form" class="d-flex flex-wrap col-10" asp-action="Update" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Salary" />
+        <input type="hidden" asp-for="SalaryCurrencyUnit" />
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" style="text-transform:uppercase" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondName" class="control-label"></label>
+                <input asp-for="SecondName" class="form-control" style="text-transform:uppercase" />
+                <span asp-validation-for="SecondName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" style="text-transform:uppercase" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondLastName" class="control-label"></label>
+                <input asp-for="SecondLastName" class="form-control" style="text-transform:uppercase" />
+                <span asp-validation-for="SecondLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CitizenId" class="control-label"></label>
+                <input asp-for="CitizenId" class="form-control" />
+                <span asp-validation-for="CitizenId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="ProfilPhotoPath" />
+                <label asp-for="ProfilePhoto" class="control-label"></label>
+                <input accept=".jpg,.jpeg,.png" asp-for="ProfilePhoto" class="form-control" />
+                <span asp-validation-for="ProfilePhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <textarea asp-for="Address" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Department" class="control-label"></label>
+                <select asp-for="Department" asp-items="@Html.GetEnumSelectList<Department>()" class="form-control"></select>
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Job" class="control-label"></label>
+                <select asp-for="Job" asp-items="@Html.GetEnumSelectList<Job>()" class="form-control"></select>
+                <span asp-validation-for="Job" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfQuit" class="control-label"></label>
+                <input asp-for="DateOfQuit" class="form-control" />
+                <span asp-validation-for="DateOfQuit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input id="phoneNumCompany" asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalPhone" class="control-label"></label>
+                <input id="phoneNum" asp-for="PersonalPhone" class="form-control" />
+                <span asp-validation-for="PersonalPhone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Salary" class="control-label"></label>
+                <input id="phoneNum" asp-for="Salary" class="form-control" />
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SalaryCurrencyUnit" class="control-label"></label>
+                <select asp-for="SalaryCurrencyUnit" asp-items="@Html.GetEnumSelectList<CurrencyUnit>()" class="form-control">
+                    <option disabled selected hidden>Para Birimi Seçiniz</option>
+                </select>
+                <span asp-validation-for="SalaryCurrencyUnit" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" asp-items="@Html.GetEnumSelectList<Status>()" class="form-control">
+                    <option disabled selected hidden>Para Birimi Seçiniz</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/lib/jquery.mask.js"></script>
+    <script>
+        $(function () {
+            $("#phoneNum").mask("(000)-000-0000")
+        })
+        $(function () {
+            $("#phoneNumCompany").mask("000-00-00")
+        })
+    </script>
+}

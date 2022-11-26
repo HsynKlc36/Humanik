@@ -1,0 +1,102 @@
+﻿@*---Employee/Permission---*@
+@model IEnumerable<HumanIK.ENTITIES.Entities.Permission>
+
+@{
+    ViewData["Title"] = "İzin Taleplerim";
+}
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">İzin Taleplerim</h1>
+    <a class="btn btn-outline-info ml-auto h-50 align-self-center px-5" asp-controller="Permission" asp-action="Add">İzin Talep Et</a>
+</div>
+<div class="container-fluid overflow-auto align-self-lg-start tableFixHead">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PermissionType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfDays)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfReply)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.ConfirmationStatus)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PermissionType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberOfDays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    @if (item.DateOfReply != null)
+                    {
+                        <td>
+                            @item.DateOfReply?.ToShortDateString()
+                        </td>
+                    }
+                    else // işlem iptal edildiğinde burası sıkıntılı, mesaj düzenlenecek
+                    { 
+                        <td>
+                            Cevap bekleniyor...
+                        </td>
+                    }
+
+                    <td class="text-center">
+                        @if (Convert.ToInt32(item.ConfirmationStatus) == 1)
+                        {
+                            <i class="mdi mdi-circle status-active"></i>
+                        }
+                        else if (Convert.ToInt32(item.ConfirmationStatus) == 2)
+                        {
+                            <i class="mdi mdi-circle status-passive"></i>
+                        }
+                        else
+                        {
+                            <i class="mdi mdi-circle status-pending"></i>
+                        }
+                    </td>
+                    <td class="text-center">
+                        @if (@item.ConfirmationStatus == ConfirmationStatus.Pending)
+                        {
+                            <a class="btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Güncelle" asp-action="Update" asp-route-id="@item.ID">
+                                <i class="mdi mdi-pencil"></i>
+                            </a>
+                            <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="İptal et" onclick="cancelPermission(@item.ID)">
+                                <i class="mdi mdi-close"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

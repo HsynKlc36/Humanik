@@ -1,0 +1,59 @@
+﻿
+@model PermissionViewModel
+
+
+@{
+
+    ViewData["Title"] = "İzin Güncelle";
+}
+
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">İzin Güncelle</h1>
+    <input type="submit" form="form" value="Güncelle" class="btn btn-outline-warning ml-auto h-50 align-self-center px-5" />
+</div>
+<div class="row col-md-8 col-sm-12 d-flex justify-content-center m-auto p-1">
+    <form enctype="multipart/form-data" id="form" class="d-flex flex-column col-5" asp-action="Update" method="post">
+        <div class="form-group">
+            <label asp-for="PermissionType" class="control-label"></label>
+            <select asp-for="PermissionType" asp-items="@Html.GetEnumSelectList<PermissionType>()" class="form-control"></select>
+            <span asp-validation-for="PermissionType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <p class="font-weight-bold font-italic">Bir yıl içinde en fazla 2 <span class="text-decoration-underline" data-toggle="tooltip" data-placement="top" title="@Model.DemandOwner.AnnualRightOfVacation">Gün</span> izin alabilirsiniz.</p>
+            <p><span class="font-weight-bold">Kalan izin hakkınız:</span> @Model.RemainingPermission  </p>
+        </div>
+        <div class="form-group">
+            <label asp-for="NumberOfDays" class="control-label"></label>
+            <input asp-for="NumberOfDays" class="form-control" />
+            <span asp-validation-for="NumberOfDays" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StartDate" class="control-label"></label>
+            <input asp-for="StartDate" class="form-control" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreateDate" class="control-label"></label>
+            <input asp-for="CreateDate" class="form-control" />
+            <span asp-validation-for="CreateDate" class="text-danger"></span>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/lib/jquery.mask.js"></script>
+    <script>
+        document.getElementById("amount").addEventListener("keypress", (e) => {
+            if (isNaN(e.key)) {
+                e.preventDefault();
+            }
+        })
+
+    </script>
+}
+
+

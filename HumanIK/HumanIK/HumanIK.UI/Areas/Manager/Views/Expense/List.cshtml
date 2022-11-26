@@ -1,0 +1,124 @@
+﻿@*---Manager/Expense---*@
+@model IEnumerable<HumanIK.ENTITIES.Entities.Expense>
+
+@{
+    ViewData["Title"] = "Harcama Talepleri";
+}
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">Harcama Talepleri</h1>
+    @*<a class="btn btn-outline-info ml-auto h-50 align-self-center px-5" asp-controller="Employee" asp-action="List">Personel Listele</a>*@
+</div>
+<div class="container-fluid overflow-auto align-self-lg-start tableFixHead">
+    <!-- tableFixHead tablo başlıklarını sayfaya sabitler-->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DemandOwner)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CurrencyUnit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfReply)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.ConfirmationStatus)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.CreateDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UpdateDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeleteDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.DemandOwner?.GetFullNameShort().ToTitleCase()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrencyUnit)
+                    </td>
+                    <td>
+                        <p class="description" data-toggle="tooltip" data-placement="bottom" title="@item.Description">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </p>
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfReply)
+                    </td>
+                    <td class="text-center">
+                        @if (Convert.ToInt32(item.ConfirmationStatus) == 1)
+                        {
+                            <i class="mdi mdi-circle status-active"></i>
+                        }
+                        else if (Convert.ToInt32(item.ConfirmationStatus) == 2)
+                        {
+                            <i class="mdi mdi-circle status-passive"></i>
+                        }
+                        else
+                        {
+                            <i class="mdi mdi-circle status-pending"></i>
+                        }
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UpdateDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeleteDate)
+                        </td>*@
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>*@
+                    <td class="text-center">
+                        @*<a class="btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Detay" asp-action="Details" asp-route-id="@item.ID">
+                                <i class="mdi mdi-account-card-details-outline"></i>
+                            </a>*@
+                        @if (item.ConfirmationStatus == ConfirmationStatus.Pending)
+                        {
+                            <a class="btn btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Onayla" onclick="confirmExpense(@item.ID)">
+                                <i class="mdi mdi-check-bold"></i>
+                            </a>
+                            <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Reddet" asp-action="Refuse" asp-route-id="@item.ID" asp-route-demandOwner="@item.DemandOwner.GetFullName()">
+                                <i class="mdi mdi-close"></i>
+                            </a>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

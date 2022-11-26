@@ -1,0 +1,513 @@
+﻿@*---Admin/Company---*@
+
+@model IEnumerable<Company>
+
+@{
+    ViewData["Title"] = "Tüm Şirketler";
+}
+
+<div class="d-flex flex-wrap header-sticky">
+    <h1 class="d-inline float-left">Tüm Şirketler</h1>
+    <div class="row d-flex ml-auto pr-5 mr-2">
+        <form class="form-inline" asp-action="Search">
+            <div class="form-group mb-2">
+                <input type="text" name="companyName" class="form-control" placeholder="Şirket Adı Giriniz: ">
+            </div>
+            <div class="form-group mb-2">
+                <input type="submit" class="btn btn-outline-github mb-auto ml-2" value="Şirket Ara" />
+                <a class="btn btn-outline-info ml-2" asp-action="Add">Şirket Ekle</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="col-12 d-flex flex-column align-self-start ">
+    <ul class="nav nav-tabs ml-5">
+        <li class="active"><a data-toggle="tab" href="#all">Tümü</a></li>
+        <li><a data-toggle="tab" href="#active">Aktif</a></li>
+        <li><a data-toggle="tab" href="#passive">Pasif</a></li>
+        <li><a data-toggle="tab" href="#pending">Beklemede</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="all" class="tab-pane fade in active in show">
+            @*TAB 1 START*@
+            <div class="container-fluid overflow-auto align-self-start m-4 tableFixHead">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Logo)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Title)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.NumberOfEmployees)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th class="text-center" scope="col">
+                                @Html.DisplayNameFor(model => model.DealStatus)
+                            </th>
+                            @*<th class="text-center" scope="col">
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </th>*@
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @if (item.Logo != null)
+                                    {
+                                        <img src="@item.Logo" style="border-radius:50%;" />
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    <p class="address" data-toggle="tooltip" data-placement="bottom" title="@item.Address">
+                                        @Html.DisplayFor(modelItem => item.Address)
+                                    </p>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NumberOfEmployees)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td class="text-center">
+                                    @if (Convert.ToInt32(item.DealStatus) == 1)
+                                    {
+                                        <i class="mdi mdi-circle status-active"></i>
+                                    }
+                                    else if (Convert.ToInt32(item.DealStatus) == 0)
+                                    {
+                                        <i class="mdi mdi-circle status-passive"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="mdi mdi-circle status-pending"></i>
+                                    }
+                                </td>
+                                @*<td class="text-center">
+                                        @if (Convert.ToInt32(item.Status) == 1)
+                                        {
+                                            <i class="mdi mdi-circle status-active"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="mdi mdi-circle status-passive"></i>
+                                        }
+                                    </td>*@
+                                <td>
+                                    @* pop-up tooltip kullanımı *@
+                                    <a class="btn btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Detay" asp-action="Details" asp-route-id="@item.CompanyID">
+                                        <i class="mdi mdi-account-details"></i>
+                                    </a>
+
+                                    <a class="btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Güncelle" asp-action="Update" asp-route-id="@item.CompanyID">
+                                        <i class="mdi mdi-pencil"></i>
+                                    </a>
+                                    @if (item.DealStatus != Status.Active)
+                                    {
+
+                                        <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Sil" onclick="deleteCompany(@item.CompanyID)">
+                                            <i class="mdi mdi-close"></i>
+                                        </a>
+                                    }
+
+                                    @*<a asp-action="DetailsCompany" asp-route-id="@item.CompanyID">Details</a> |
+                                        <a asp-action="DeleteCompany" asp-route-id="@item.CompanyID">Delete</a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @*TAB 1 END*@
+        </div>
+        <div id="active" class="tab-pane fade">
+            @*TAB 2 START*@
+            <div class="container-fluid overflow-auto align-self-start m-4 tableFixHead">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Logo)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Title)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.NumberOfEmployees)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                            </th>
+                            <th scope="col">
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th class="text-center" scope="col">
+                                @Html.DisplayNameFor(model => model.DealStatus)
+                            </th>
+                            @*<th class="text-center" scope="col">
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </th>*@
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+
+                            @if (item.DealStatus == Status.Active)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @if (item.Logo != null)
+                                        {
+                                            <img src="@item.Logo" style="border-radius:50%;" />
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        <p class="address" data-toggle="tooltip" data-placement="bottom" title="@item.Address">
+                                            @Html.DisplayFor(modelItem => item.Address)
+                                        </p>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NumberOfEmployees)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td class="text-center">
+                                        @if (Convert.ToInt32(item.DealStatus) == 1)
+                                        {
+                                            <i class="mdi mdi-circle status-active"></i>
+                                        }
+                                        else if (Convert.ToInt32(item.DealStatus) == 0)
+                                        {
+                                            <i class="mdi mdi-circle status-passive"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="mdi mdi-circle status-pending"></i>
+                                        }
+                                    </td>
+                                    @*<td class="text-center">
+                                            @if (Convert.ToInt32(item.Status) == 1)
+                                            {
+                                                <i class="mdi mdi-circle status-active"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="mdi mdi-circle status-passive"></i>
+                                            }
+                                        </td>*@
+                                    <td>
+                                        @* pop-up tooltip kullanımı *@
+                                        <a class="btn btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Detay" asp-action="Details" asp-route-id="@item.CompanyID">
+                                            <i class="mdi mdi-account-details"></i>
+                                        </a>
+
+                                        <a class="btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Güncelle" asp-action="Update" asp-route-id="@item.CompanyID">
+                                            <i class="mdi mdi-pencil"></i>
+                                        </a>
+                                        @if (item.DealStatus != Status.Active)
+                                        {
+
+                                            <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Sil" onclick="deleteCompany(@item.CompanyID)">
+                                                <i class="mdi mdi-close"></i>
+                                            </a>
+                                        }
+
+                                        @*<a asp-action="DetailsCompany" asp-route-id="@item.CompanyID">Details</a> |
+                                            <a asp-action="DeleteCompany" asp-route-id="@item.CompanyID">Delete</a>*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @*TAB 2 END*@
+            </div>
+            <div id="passive" class="tab-pane fade">
+                <div class="container-fluid overflow-auto align-self-start m-4 tableFixHead">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Logo)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Address)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.NumberOfEmployees)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th class="text-center" scope="col">
+                                    @Html.DisplayNameFor(model => model.DealStatus)
+                                </th>
+                                @*<th class="text-center" scope="col">
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>*@
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+
+                                @if (item.DealStatus == Status.Passive)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @if (item.Logo != null)
+                                            {
+                                                <img src="@item.Logo" style="border-radius:50%;" />
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            <p class="address" data-toggle="tooltip" data-placement="bottom" title="@item.Address">
+                                                @Html.DisplayFor(modelItem => item.Address)
+                                            </p>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NumberOfEmployees)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td class="text-center">
+                                            @if (Convert.ToInt32(item.DealStatus) == 1)
+                                            {
+                                                <i class="mdi mdi-circle status-active"></i>
+                                            }
+                                            else if (Convert.ToInt32(item.DealStatus) == 0)
+                                            {
+                                                <i class="mdi mdi-circle status-passive"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="mdi mdi-circle status-pending"></i>
+                                            }
+                                        </td>
+                                        @*<td class="text-center">
+                                                @if (Convert.ToInt32(item.Status) == 1)
+                                                {
+                                                    <i class="mdi mdi-circle status-active"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="mdi mdi-circle status-passive"></i>
+                                                }
+                                            </td>*@
+                                        <td>
+                                            @* pop-up tooltip kullanımı *@
+                                            <a class="btn btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Detay" asp-action="Details" asp-route-id="@item.CompanyID">
+                                                <i class="mdi mdi-account-details"></i>
+                                            </a>
+
+                                            <a class="btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Güncelle" asp-action="Update" asp-route-id="@item.CompanyID">
+                                                <i class="mdi mdi-pencil"></i>
+                                            </a>
+                                            @if (item.DealStatus != Status.Active)
+                                            {
+
+                                                <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Sil" onclick="deleteCompany(@item.CompanyID)">
+                                                    <i class="mdi mdi-close"></i>
+                                                </a>
+                                            }
+
+                                            @*<a asp-action="DetailsCompany" asp-route-id="@item.CompanyID">Details</a> |
+                                                <a asp-action="DeleteCompany" asp-route-id="@item.CompanyID">Delete</a>*@
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="pending" class="tab-pane fade">
+                    <div class="container-fluid overflow-auto align-self-start m-4 tableFixHead">
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.Logo)
+                                    </th>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </th>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.Address)
+                                    </th>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.NumberOfEmployees)
+                                    </th>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                                    </th>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.Email)
+                                    </th>
+                                    <th class="text-center" scope="col">
+                                        @Html.DisplayNameFor(model => model.DealStatus)
+                                    </th>
+                                    @*<th class="text-center" scope="col">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </th>*@
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+
+                                    @if (item.DealStatus == Status.Pending)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                @if (item.Logo != null)
+                                                {
+                                                    <img src="@item.Logo" style="border-radius:50%;" />
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Title)
+                                            </td>
+                                            <td>
+                                                <p class="address" data-toggle="tooltip" data-placement="bottom" title="@item.Address">
+                                                    @Html.DisplayFor(modelItem => item.Address)
+                                                </p>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NumberOfEmployees)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td class="text-center">
+                                                @if (Convert.ToInt32(item.DealStatus) == 1)
+                                                {
+                                                    <i class="mdi mdi-circle status-active"></i>
+                                                }
+                                                else if (Convert.ToInt32(item.DealStatus) == 0)
+                                                {
+                                                    <i class="mdi mdi-circle status-passive"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="mdi mdi-circle status-pending"></i>
+                                                }
+                                            </td>
+                                            @*<td class="text-center">
+                                                    @if (Convert.ToInt32(item.Status) == 1)
+                                                    {
+                                                        <i class="mdi mdi-circle status-active"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="mdi mdi-circle status-passive"></i>
+                                                    }
+                                                </td>*@
+                                            <td>
+                                                @* pop-up tooltip kullanımı *@
+                                                <a class="btn btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Detay" asp-action="Details" asp-route-id="@item.CompanyID">
+                                                    <i class="mdi mdi-account-details"></i>
+                                                </a>
+
+                                                <a class="btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Güncelle" asp-action="Update" asp-route-id="@item.CompanyID">
+                                                    <i class="mdi mdi-pencil"></i>
+                                                </a>
+                                                @if (item.DealStatus != Status.Active)
+                                                {
+
+                                                    <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Sil" onclick="deleteCompany(@item.CompanyID)">
+                                                        <i class="mdi mdi-close"></i>
+                                                    </a>
+                                                }
+
+                                                @*<a asp-action="DetailsCompany" asp-route-id="@item.CompanyID">Details</a> |
+                                                    <a asp-action="DeleteCompany" asp-route-id="@item.CompanyID">Delete</a>*@
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        @*TAB 3 END*@
+                    </div>
+                </div>
+
+
+            </div>
+

@@ -1,0 +1,123 @@
+﻿@*---Admin/Company---*@
+
+@model Company
+
+@{
+    ViewData["Title"] = "Şirket Güncelle";
+}
+
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">Şirket Güncelle</h1>
+    @*<a class="btn btn-outline-warning ml-auto h-50 align-self-center" asp-action="List">Şirket Listesi</a>*@
+    <input type="submit" value="Kaydet" form="form" class="btn btn-outline-warning ml-auto h-50 align-self-center" />
+</div>
+<div class="row col-md-8 col-sm-12 justify-content-center d-flex m-auto p-1">
+    <form asp-action="Update" id="form" class="d-flex flex-wrap col-10" enctype="multipart/form-data">
+        <div class="col-md-6 col-sm-12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CompanyID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" style="text-transform:uppercase" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <select asp-for="Title" asp-items="@Html.GetEnumSelectList<Title>()" class="form-control"></select>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Logo" />
+                <label asp-for="LogoFile" class="control-label"></label>
+                <input asp-for="LogoFile" accept=".jpg, .jpeg, .png" class="form-control" style="width:100%; margin:auto" />
+                <span asp-validation-for="LogoFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaxAdministration" class="control-label"></label>
+                <input asp-for="TaxAdministration" class="form-control" style="text-transform:uppercase" />
+                <span asp-validation-for="TaxAdministration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaxNo" class="control-label"></label>
+                <input asp-for="TaxNo" maxlength="10" class="form-control" />
+                <span asp-validation-for="TaxNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MersisNo" class="control-label"></label>
+                <input asp-for="MersisNo" maxlength="16" class="form-control" />
+                <span asp-validation-for="MersisNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <textarea asp-for="Address" rows="2" class="form-control" style="width:100%; margin:auto; text-transform:uppercase"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" asp-items="@Html.GetEnumSelectList<Status>()" class="form-control" disabled></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Founded" class="control-label"></label>
+                <input asp-for="Founded" class="form-control" />
+                <span asp-validation-for="Founded" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DealStartDate" class="control-label"></label>
+                <input asp-for="DealStartDate" class="form-control" />
+                <span asp-validation-for="DealStartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DealEndDate" class="control-label"></label>
+                <input asp-for="DealEndDate" class="form-control" />
+                <span asp-validation-for="DealEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfEmployees" class="control-label"></label>
+                <input id="empNum" min="1" asp-for="NumberOfEmployees" class="form-control" />
+                <span asp-validation-for="NumberOfEmployees" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input id="phoneNum" asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sector" class="control-label"></label>
+                <select asp-for="Sector" asp-items="@Html.GetEnumSelectList<Sector>()" class="form-control"></select>
+                <span asp-validation-for="Sector" class="text-danger"></span>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@*<div>
+    <button asp-action="AllCompany" class="btn btn-outline-dark">Şirket Listesi</button>
+    </div>*@
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/lib/jquery.mask.js"></script>
+    <script>
+        $(function () {
+            $("#phoneNum").mask("(000)-000-0000")
+        })
+
+        document.getElementById("empNum").addEventListener("keypress", (e) => {
+            if (isNaN(e.key)) {
+                e.preventDefault();
+            }
+        })
+    </script>
+}

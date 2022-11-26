@@ -1,0 +1,72 @@
+﻿@*---Employee---*@
+@model HumanIK.ENTITIES.Entities.AppUser
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">@Model.GetFullNameShort().ToTitleCase() Detayları</h1>
+    <a class="btn btn-outline-warning ml-auto h-50 align-self-center" asp-action="Update">Düzenle</a>
+</div>
+<div class="d-flex flex-wrap col-12 justify-content-center">
+    <div class="d-flex col-lg-5 flex-wrap justify-content-center">
+        @if (string.IsNullOrEmpty(Model.ProfilePhoto))
+        {
+            <div class="profile-photo-container">
+                <img src="~/img/default-profile-photo.jpg" />
+            </div>
+        }
+        else
+        {
+            <div class="profile-photo-container">
+                <div class="profile-photo" style="background-image: url(@Model.ProfilePhoto); "></div>
+            </div>
+        }
+    </div>
+    <div class="card col-lg-6 col-md-8 col-sm-10 justify-content-center">
+        <div class="card-body">
+            <div class="detail-item d-flex border-bottom ">
+                <label asp-for="Name" class="col-5"></label>
+                <span class="col-5">@Model.Name.ToTitleCase() @Model.SecondName?.ToTitleCase()</span>
+            </div>
+            <div class="detail-item d-flex border-bottom ">
+                <label asp-for="LastName" class="col-5"></label>
+                <span class="col-5">@Model.LastName.ToTitleCase() @Model.SecondLastName?.ToTitleCase()</span>
+            </div>
+            <div class="detail-item d-flex border-bottom ">
+                <label asp-for="CitizenId" class="col-5" style="text-align:right"></label>
+                <span class="col-5">@Model.CitizenId</span>
+            </div>
+            <div class="detail-item d-flex border-bottom ">
+                <label asp-for="BirthDate" class="col-5"></label>
+                <span class="col-5">@Model.BirthDate.ToShortDateString()</span>
+            </div>
+            <div class="detail-item d-flex border-bottom ">
+                <label asp-for="Job" class="col-5"></label>
+                <span class="col-5">@Model.Job.GetDisplayName()</span>
+            </div>
+            <div class="detail-item d-flex border-bottom ">
+                <label asp-for="Department" class="col-5"></label>
+                <span class="col-5">@Model.Department</span>
+            </div>
+            <div class="detail-item d-flex border-bottom  ">
+                <label asp-for="Address" class="col-5"></label>
+                <span class="col-5">@Model.Address</span>
+            </div>
+            <div class="detail-item d-flex border-bottom  ">
+                <label asp-for="PersonalPhone" class="col-5"></label>
+                <span class="col-5">@Model.PersonalPhone</span>
+            </div>
+            <div class="detail-item d-flex border-bottom  ">
+                <label asp-for="PhoneNumber" class="col-5"></label>
+                <span class="col-5">@Model.PhoneNumber</span>
+            </div>
+            <div class="detail-item d-flex border-bottom  ">
+                <label asp-for="Email" class="col-5"></label>
+                <span class="col-5">@Model.Email</span>
+            </div>
+        </div>
+    </div>
+</div>

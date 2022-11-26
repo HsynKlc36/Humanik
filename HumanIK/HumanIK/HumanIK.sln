@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanIK.UI", "HumanIK.UI\HumanIK.UI.csproj", "{01C2D541-7A70-4006-8983-C8A4920685FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanIK.REPOSITORIES", "HumanIK.REPOSITORIES\HumanIK.REPOSITORIES.csproj", "{CAC2975F-D8BF-478D-951D-1F127F1F3439}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanIK.ENTITIES", "HumanIK.ENTITIES\HumanIK.ENTITIES.csproj", "{020E2041-A87B-4268-B7F0-07A5BC5C7F9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanIK.BUSINESS", "HumanIK.BUSINESS\HumanIK.BUSINESS.csproj", "{B912C0C3-85C9-4FE4-921B-C46A9B1E4AF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01C2D541-7A70-4006-8983-C8A4920685FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C2D541-7A70-4006-8983-C8A4920685FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C2D541-7A70-4006-8983-C8A4920685FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C2D541-7A70-4006-8983-C8A4920685FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAC2975F-D8BF-478D-951D-1F127F1F3439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC2975F-D8BF-478D-951D-1F127F1F3439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC2975F-D8BF-478D-951D-1F127F1F3439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC2975F-D8BF-478D-951D-1F127F1F3439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{020E2041-A87B-4268-B7F0-07A5BC5C7F9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{020E2041-A87B-4268-B7F0-07A5BC5C7F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{020E2041-A87B-4268-B7F0-07A5BC5C7F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{020E2041-A87B-4268-B7F0-07A5BC5C7F9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B912C0C3-85C9-4FE4-921B-C46A9B1E4AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B912C0C3-85C9-4FE4-921B-C46A9B1E4AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B912C0C3-85C9-4FE4-921B-C46A9B1E4AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B912C0C3-85C9-4FE4-921B-C46A9B1E4AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75EF2E5D-64DD-4366-BBDF-C205F584FC44}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/ozdemireren
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = HumanIK.BUSINESS\\HumanIK.BUSINESS.csproj
+		SccProjectName1 = HumanIK.BUSINESS
+		SccLocalPath1 = HumanIK.BUSINESS
+		SccProjectUniqueName2 = HumanIK.ENTITIES\\HumanIK.ENTITIES.csproj
+		SccProjectName2 = HumanIK.ENTITIES
+		SccLocalPath2 = HumanIK.ENTITIES
+		SccProjectUniqueName3 = HumanIK.REPOSITORIES\\HumanIK.REPOSITORIES.csproj
+		SccProjectName3 = HumanIK.REPOSITORIES
+		SccLocalPath3 = HumanIK.REPOSITORIES
+		SccProjectUniqueName4 = HumanIK.UI\\HumanIK.UI.csproj
+		SccProjectName4 = HumanIK.UI
+		SccLocalPath4 = HumanIK.UI
+	EndGlobalSection
+EndGlobal

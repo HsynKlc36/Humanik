@@ -1,0 +1,99 @@
+﻿@*---Employee/Expense---*@
+@model IEnumerable<HumanIK.ENTITIES.Entities.Expense>
+
+@{
+    ViewData["Title"] = "Harcama Taleplerim";
+}
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">Harcama Taleplerim</h1>
+    <a class="btn btn-outline-info ml-auto h-50 align-self-center px-5" asp-controller="Expense" asp-action="Add">Harcama Talep Et</a>
+</div>
+<div class="container-fluid overflow-auto align-self-lg-start tableFixHead">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CurrencyUnit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfReply)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.ConfirmationStatus)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrencyUnit)
+                    </td>
+                    <td>
+                        <p class="description" data-toggle="tooltip" data-placement="bottom" title="@item.Description">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </p>
+
+                    </td>
+                    @if (item.DateOfReply != null)
+                    {
+                        <td>
+                            @item.DateOfReply?.ToShortDateString()<!-- bakılacak!-->
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Cevap bekleniyor...
+                        </td>
+                    }
+
+                    <td class="text-center">
+                        @if (Convert.ToInt32(item.ConfirmationStatus) == 1)
+                        {
+                            <i class="mdi mdi-circle status-active"></i>
+                        }
+                        else if (Convert.ToInt32(item.ConfirmationStatus) == 2)
+                        {
+                            <i class="mdi mdi-circle status-passive"></i>
+                        }
+                        else
+                        {
+                            <i class="mdi mdi-circle status-pending"></i>
+                        }
+                    </td>
+                    <td class="text-center">
+                        @if (@item.ConfirmationStatus == ConfirmationStatus.Pending)
+                        {
+                            <a class="btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Güncelle" asp-action="Update" asp-route-id="@item.ID">
+                                <i class="mdi mdi-pencil"></i>
+                            </a>
+                            <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="İptal et" onclick="cancelExpense(@item.ID)">
+                                <i class="mdi mdi-close"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

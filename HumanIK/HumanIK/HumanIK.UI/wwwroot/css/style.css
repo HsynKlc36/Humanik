@@ -1,0 +1,368 @@
+﻿body {
+    min-height: 100%;
+    width: 100vw;
+    display: flex;
+}
+
+.detail-wrapper label {
+    font-weight: 600;
+}
+
+    .detail-wrapper label::after {
+        content: ": "
+    }
+
+.detail-item {
+    margin-bottom: 0.5rem;
+}
+
+    .detail-item > label {
+        font-weight: 800;
+    }
+
+        .detail-item > label::after {
+            content: ":";
+        }
+
+
+.profile-photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo {
+    width: 300px;
+    height: 300px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 100%;
+}
+
+.index-profile-photo {
+    width: 300px;
+    height: 300px;
+}
+
+.nav-profile-photo {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background-position: center !important;
+    background-size: cover !important;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+}
+
+.sidebar-profile-photo {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    background-position: center !important;
+    background-size: cover !important;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+}
+
+.container-fluid {
+    background-color: #f2f2f2;
+    min-height: 100%;
+}
+
+.container-scroller {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*    padding-left: 0;*/
+}
+
+.content-wrapper {
+    padding-top: 10rem;
+    min-height: calc(100vh - 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    z-index: 2;
+}
+
+
+footer {
+    margin-top: auto;
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+}
+
+
+
+.sidebar-icon-only #sidebar {
+    width: 70px;
+}
+
+    .sidebar-icon-only #sidebar .nav-profile {
+        display: none !important;
+    }
+
+
+.admin-sidebar {
+    background: linear-gradient(0deg, #e67b13, #F5A311);
+}
+
+.manager-sidebar {
+    background: linear-gradient(0deg, tomato, #F5A311);
+}
+
+.employee-sidebar {
+    background: linear-gradient(0deg, purple, #F5A311);
+}
+
+.container-scroller {
+    margin-left: 215px;
+    transition: all 0.25s ease-out;
+}
+
+.sidebar-icon-only .container-scroller {
+    margin-left: 70px;
+}
+
+
+.header-sticky {
+    position: fixed;
+    top: 4.4rem;
+    width: calc(100% - 265px);
+    z-index: 1;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    /*    border-bottom: 1px solid black;*/
+    transition: all 0.25s ease-out;
+}
+
+
+.sidebar-icon-only .header-sticky {
+    width: calc(100% - 120px);
+}
+
+
+
+@media only screen and (max-width: 992px) {
+    .container-scroller {
+        margin-left: 0;
+        transition: all 0.25s ease-out;
+    }
+
+    .header-sticky {
+        width: calc(100% - 50px);
+    }
+}
+
+.address, .description {
+    width: 8vw;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis;
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.detail-item label {
+    text-align: right;
+}
+
+.detail-item span {
+    text-align: left;
+}
+
+.status-active {
+    color: rgb(40,167,69);
+}
+
+.status-passive {
+    color: #d9534f;
+}
+
+.status-pending {
+    color: orange;
+}
+
+select {
+    color: black !important;
+}
+
+.form-control {
+    height: 37px;
+    line-height: 1.1rem;
+}
+
+.btn-outline-danger {
+    border-color: #d9534f;
+    color: #d9534f;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #d9534f !important;
+        border-color: #d9534f;
+    }
+
+    .btn-outline-danger:active, .btn-outline-danger:focus {
+        background-color: #d9534f !important;
+        border-color: #d9534f;
+        box-shadow: none;
+    }
+
+    .btn-outline-danger:not(:disabled):not(.disabled):active:focus, .btn-outline-danger:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-danger.dropdown-toggle:focus {
+        background-color: #d9534f !important;
+        border-color: #d9534f;
+        box-shadow: none;
+    }
+
+.role {
+    position: absolute;
+    bottom: 1rem;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.accordion-item {
+    cursor: default;
+}
+
+.tabsul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.tabsli {
+    float: left;
+}
+
+    .tabsli a {
+        display: block;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        border: 2px solid #E67B13;
+        border-radius: 5px;
+        margin: 1px;
+        padding: 2px
+    }
+
+        .tabsli a:hover {
+            background-color: #E67B13;
+            color: white;
+        }
+
+form label {
+    font-weight: 800;
+}
+
+.tableFixHead {
+    overflow: auto;
+    max-height: 70vh;
+    border-collapse: separate;
+}
+
+    .tableFixHead thead {
+        position: sticky;
+        top: -1px;
+        z-index: 1;
+        box-sizing: border-box;
+        background-color: #F2F2F2;
+        border-top: none !important;
+        border-bottom: none !important;
+        box-shadow: inset 0 -2px 0 #000000;
+    }
+
+
+/* Just common table stuff. Really. */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px 16px;
+}
+
+th {
+    background: #eee;
+}
+
+
+.profile-photo-update-container {
+    position: relative;
+}
+
+    .profile-photo-update-container:hover .hover-item {
+        opacity: 1; 
+    }
+
+    .profile-photo-update-container .hover-item {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        background-color: rgba(184,184,184, 0.5);
+        border-radius: 50%;
+        transition: all 0.1s linear;
+    }
+
+    .profile-photo-update-container input {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .profile-photo-update-container label {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+.nav-tabs li {
+    margin: 0px;
+    background-color: #292D33;
+    padding: 0.5rem 1rem;
+    border-radius: 10px 10px 0 0;
+    text-decoration: none;
+    margin-right: 2px;
+}
+
+.nav-tabs a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-tabs li.active {
+    background-color: orange;
+    color: white;
+}
+
+.nav-tabs li.active a {
+    color: white;
+}
+
+.tab-content{
+    padding: 0;
+}

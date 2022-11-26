@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="katman_1" data-name="katman 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1242.84 321.83">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        font-family: CenturyGothic, 'Century Gothic';
+        font-size: 242.76px;
+      }
+
+      .cls-1, .cls-3 {
+        fill: #292d33;
+      }
+
+      .cls-2, .cls-4 {
+        fill: #e67b13;
+      }
+
+      .cls-5 {
+        fill: #9d081a;
+      }
+    </style>
+  </defs>
+  <polyline class="cls-3" points="205.55 69.17 152.35 157.61 116.85 157.61 120.01 141.8 170.11 69.17 205.58 69"/>
+  <polygon class="cls-3" points="123.19 156.05 152.35 157.27 179.75 246.06 144.39 246.06 121.8 168.21 123.19 156.05"/>
+  <g>
+    <polygon class="cls-5" points="35.45 245.36 35.45 246.23 35.27 246.23 35.45 245.36"/>
+    <polygon class="cls-5" points="35.45 69 35.27 69.87 35.27 69 35.45 69"/>
+  </g>
+  <g>
+    <polygon class="cls-5" points="106.25 245.36 106.25 246.23 106.08 246.23 106.25 245.36"/>
+    <polygon class="cls-5" points="106.25 69 106.08 69.87 106.08 69 106.25 69"/>
+  </g>
+  <ellipse class="cls-3" cx="128.15" cy="37.45" rx="17.75" ry="17.69" transform="translate(11.03 101.54) rotate(-44.98)"/>
+  <polygon class="cls-3" points="106.31 68.82 141.52 68.82 106.08 246.06 70.8 246.06 86.44 167.87 50.93 167.87 35.47 245.19 35.29 246.06 0 246.06 35.45 68.82 70.69 68.82 56.06 141.45 91.59 141.8 106.31 68.82"/>
+  <polygon class="cls-4" points="106.25 69 70.8 246.06 106.08 246.06 141.52 68.82 106.25 69"/>
+  <g>
+    <text class="cls-2" transform="translate(245.84 247.39)"><tspan x="0" y="0">human</tspan></text>
+    <text class="cls-1" transform="translate(1070.92 247.26)"><tspan x="0" y="0">ik</tspan></text>
+  </g>
+</svg>

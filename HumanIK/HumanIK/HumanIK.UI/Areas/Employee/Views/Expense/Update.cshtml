@@ -1,0 +1,63 @@
+﻿@*---Employee/Expense---*@
+@model Expense
+
+
+@{
+
+    ViewData["Title"] = "Harcama Güncelle";
+}
+
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">Harcama Güncelle</h1>
+    <input type="submit" form="form" value="Güncelle" class="btn btn-outline-warning ml-auto h-50 align-self-center px-5" />
+</div>
+<div class="row col-md-8 col-sm-12 d-flex justify-content-center m-auto p-1">
+    <form enctype="multipart/form-data" id="form" class="d-flex flex-column col-5" asp-action="Update" method="post">
+        <input type="hidden" asp-for="ExpenseDemandOwnerId" />
+        <input type="hidden" asp-for="ID" />
+        <div class="form-group">
+            <label asp-for="ExpenseType" class="control-label"></label>
+            <select asp-for="ExpenseType" asp-items="@Html.GetEnumSelectList<ExpenseType>()" class="form-control"></select>
+            <span asp-validation-for="ExpenseType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Amount" class="control-label"></label>
+            <div class="d-flex align-items-center">
+                <input id="amount" asp-for="Amount" class="form-control mr-2" style='text-transform:uppercase' />
+                <span>@Model.CurrencyUnit</span>
+            </div>
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ExpenseFile" class="control-label"></label>
+            <input accept=".pdf, .jpg, .jpeg, .png" asp-for="ExpenseFile" class="form-control" />
+            <span asp-validation-for="ExpenseFile" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreateDate" class="control-label"></label>
+            <input asp-for="CreateDate" class="form-control" />
+            <span asp-validation-for="CreateDate" class="text-danger"></span>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/lib/jquery.mask.js"></script>
+    <script>
+        document.getElementById("amount").addEventListener("keypress", (e) => {
+            if (isNaN(e.key)) {
+                e.preventDefault();
+            }
+        })
+
+    </script>
+}

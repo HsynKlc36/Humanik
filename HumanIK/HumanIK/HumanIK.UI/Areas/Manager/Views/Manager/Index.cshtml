@@ -1,0 +1,45 @@
+﻿@*---Manager---*@
+@model AppUser
+@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+<div class="d-flex header-sticky">
+    <h1 class="float-left ml-0">Hoşgeldin @Model.GetFullNameShort().ToTitleCase()</h1>
+</div>
+
+@*Foto - AdSoyad - Mail - Telefonlar - Adres*@
+<div class="container mt-5">
+    <div class="col-12 d-flex flex-wrap">
+        <div class="profile-photo-container col-md-5 mb-3">
+            <div class="index-profile-photo profile-photo" style="background-image: url(@Model.ProfilePhoto)"></div>
+        </div>
+
+        <div class="card col-md-7">
+            <div class="card-header">
+                <h1 class="card-title text-center">@Model.GetFullName().ToTitleCase()</h1>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <strong><label asp-for="Email"></label></strong>
+                    <p>@Model.Email</p>
+                </li>
+                <li class="list-group-item">
+                    <strong><label asp-for="Address"></label></strong>
+                    <p>@Model.Address</p>
+                </li>
+                <li class="list-group-item">
+                    <strong><label asp-for="PersonalPhone"></label></strong>
+                    <p>@Model.PersonalPhone</p>
+                </li>
+                <li class="list-group-item">
+                    <strong><label asp-for="PhoneNumber"></label></strong>
+                    <p>@Model.PhoneNumber</p>
+                </li>
+            </ul>
+            <div class="card-body">
+                <a asp-action="Details">Detayları Göster</a>
+            </div>
+        </div>
+    </div>
+</div>

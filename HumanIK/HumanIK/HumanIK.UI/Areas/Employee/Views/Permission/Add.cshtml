@@ -1,0 +1,75 @@
+﻿@model PermissionViewModel
+
+@{
+    ViewData["Title"] = "İzin Talep Et";
+}
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">İzin Talep Et</h1>
+    <input type="submit" form="form" value="Talep et" class="btn btn-outline-info ml-auto h-50 align-self-center px-5" />
+</div>
+<div class="row col-md-8 col-sm-12 d-flex justify-content-center m-auto p-1">
+    <form enctype="multipart/form-data" id="form" class="d-flex flex-column col-5" asp-action="Add" method="post">
+        <input type="hidden" asp-for="DemandOwner.Id"/>
+        <input type="hidden" asp-for="RemainingPermission"/>
+        <div class="form-group">
+            <label asp-for="PermissionType" class="control-label"></label>
+            <select id="permissionType" asp-for="PermissionType" asp-items="@Html.GetEnumSelectList<PermissionType>()" onchange="handlePermissionTypeChange()" class="form-control"></select>
+            <span asp-validation-for="PermissionType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <p id="infoMessage" class="font-weight-bold font-italic">Bir yıl içinde en fazla @Model.DemandOwner.AnnualRightOfVacation gün izin alabilirsiniz.</p>
+            <p><span class="font-weight-bold">Kalan izin hakkınız:</span> <span id="permissionRight">@Model.RemainingPermission</span></p>
+        </div>
+        <div id="numberOfDaysGroup" class="form-group">
+            <label asp-for="NumberOfDays" class="control-label"></label>
+            <input id="numberOfDays" asp-for="NumberOfDays" class="form-control" />
+            <span asp-validation-for="NumberOfDays" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StartDate" class="control-label"></label>
+            <input asp-for="StartDate" class="form-control" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreateDate" class="control-label"></label>
+            <input asp-for="CreateDate" class="form-control" />
+            <span asp-validation-for="CreateDate" class="text-danger"></span>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/lib/jquery.mask.js"></script>
+    <script>
+        const list = document.getElementById("permissionType")
+        const msg = document.getElementById("infoMessage")
+        const numberOfDays = document.getElementById("numberOfDays")
+        const numberOfDaysGroup = document.getElementById("numberOfDaysGroup")
+        const permissionRight = document.getElementById("permissionRight")
+        const numbers = [0,30,3,3,5,1,10,1,30,1]
+        numberOfDays.addEventListener("keypress", (e) => {
+            if (isNaN(e.key)) {
+                e.preventDefault();
+            }
+        })
+
+        function handlePermissionTypeChange() {
+            if (list.value == 1) { // Yıllık izin index= 1
+                numberOfDays.disabled = false;
+                msg.style.display = "block";
+            } else {
+                msg.style.display = "none";
+                $('#numberOfDays').attr('value', numbers[list.selectedIndex]);
+                numberOfDays.disabled = true; 
+            }
+        }
+
+        handlePermissionTypeChange();
+    </script>
+}
+
+

@@ -1,0 +1,106 @@
+﻿@*---Manager/Employee---*@
+@model IEnumerable<HumanIK.ENTITIES.Entities.AppUser>
+
+@{
+    ViewData["Title"] = "Personel Listesi";
+}
+
+<div class="d-flex header-sticky">
+    <h1 class="d-inline ml-0">Personel Listesi</h1>
+    <a class="btn btn-outline-info ml-auto h-50 align-self-center px-5" asp-action="Add">Personel ekle</a>
+</div>
+<div class="container-fluid overflow-auto align-self-lg-start tableFixHead">
+    <table class="table table-hover ">
+        <thead>
+            <tr>
+                <th>
+                    Logo
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PersonalPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        <img src="@item.ProfilePhoto" style="border-radius:50%;" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.SecondName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName) @Html.DisplayFor(modelItem => item.SecondLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Job)
+                    </td>
+                    <td>
+                        <p class="address" data-toggle="tooltip" data-placement="bottom" title="@item.Address">
+                            <!--bootstrap modal oluşturmamızı sağladı ve adress class' ını css de düzenledik!-->
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </p>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PersonalPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="text-center">
+                        @if (item.Status == Status.Active)
+                        {
+                            <i class="mdi mdi-circle status-active"></i>
+                        }
+                        else if (item.Status == Status.Pending)
+                        {
+                            <i class="mdi mdi-circle status-pending"></i>
+                        }
+                        else
+                        {
+                            <i class="mdi mdi-circle status-passive"></i>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Detay" asp-action="Details" asp-route-id="@item.Id">
+                            <i class="mdi mdi-account-card-details-outline"></i>
+                        </a>
+                        <a class="btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Güncelle" asp-action="Update" asp-route-id="@item.Id">
+                            <i class="mdi mdi-pencil"></i>
+                        </a>
+                        <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Sil" asp-action="Delete" asp-route-id="@item.Id">
+                            <i class="mdi mdi-close"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

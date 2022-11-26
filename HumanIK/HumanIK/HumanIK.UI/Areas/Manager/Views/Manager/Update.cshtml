@@ -1,0 +1,79 @@
+﻿@*---Manager---*@
+@model UpdateViewModel
+
+
+
+@{
+    ViewData["Title"] = "Güncelle";
+}
+<div class="d-flex header-sticky">
+    <h1 class="d-inline">@Model.GetFullNameShort().ToTitleCase() Güncelle</h1>
+    <div class=" d-flex ml-auto h-50 align-self-center">
+        <input type="submit" form="form" value="Güncelle" class="btn btn-outline-warning ml-2" />
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="col col-lg-12 col-md-12 col-sm-12">
+        <div class="row m-auto">
+            <div class="col-md-12 text-center">
+                <form asp-action="Update" id="form" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ProfilePhotoPath" />
+
+                    @if (string.IsNullOrEmpty(Model.ProfilePhotoPath))
+                    {
+                        <div class="profile-photo-update-container">
+                            <div class="hover-item">
+                                <label asp-for="ProfilePhoto" class="control-label"><span><i class="mdi mdi-camera"></i> Yükle</span></label>
+                                <input asp-for="ProfilePhoto" class="form-control profile-photo-input" accept=".jpg, .jpeg, .png" />
+                            </div>
+                            <div class="profile-photo-container">
+                                <img src="~/img/default-profile-photo.jpg" alt="Alternate Text" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="profile-photo-update-container">
+                            <div class="hover-item">
+                                <label asp-for="ProfilePhoto" class="control-label"><span><i class="mdi mdi-camera"></i> Yükle</span></label>
+                                <input asp-for="ProfilePhoto" class="form-control profile-photo-input" accept=".jpg, .jpeg, .png" />
+                            </div>
+                            <div class="profile-photo-container">
+                                <div id="photoUploadTarget" class="profile-photo" style="background-image: url(@Model.ProfilePhotoPath); "></div>
+                            </div>
+                        </div>
+                    }
+                    <div class="form-group mt-4">
+                        <label asp-for="Adress" class="control-label"></label>
+                        @*<input asp-for="Adress" class="form-control" />*@
+                        <textarea asp-for="Adress" rows="5" class="form-control"></textarea>
+                        <span asp-validation-for="Adress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PersonelPhone" class="control-label"></label>
+                        <input id="phoneNum1" asp-for="PersonelPhone" class="form-control" />
+                        <span asp-validation-for="PersonelPhone" class="text-danger"></span>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/lib/jquery.mask.js"></script>
+    <script>
+        $(function () {
+            $("#phoneNum1").mask("(000)-000-0000")
+        })
+    </script>
+
+}

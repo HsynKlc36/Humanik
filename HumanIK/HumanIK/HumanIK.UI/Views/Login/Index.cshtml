@@ -1,0 +1,64 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Giriş Sayfası";
+}
+ <!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <link href="~/Template/assets/css/loginPage.css" rel="stylesheet" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+     <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+     <script defer src="~/Template/assets/js/main.js"></script>
+     <title>@ViewBag.Title</title>
+ </head>
+
+ <body>
+     <div class="container">
+         <div class="bg-image"></div>
+         <div class="wrapper">
+             <div class="logo"></div>
+
+             <div class="screen">
+                 <div class="screen__content">
+                     <form class="login" method="post" asp-action="index">
+                         <div asp-validation-summary="All" class="text-danger"></div>
+                         <div class="login__field">
+                             <i class="login__icon fas fa-user"></i>
+                             <input name="Email" type="text" class="login__input" placeholder="E-posta" />
+                             @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                         </div>
+                         <div class="login__field">
+                             <i class="login__icon fas fa-lock"></i>
+                             <input name="Password" type="password" class="login__input" placeholder="Şifre" />
+                             <i class="show-hide-icon fa-solid fa-eye"></i>
+                             @*<span asp-validation-for="Password" class="text-danger"></span>*@
+                         </div>
+                         <button class="button login__submit">
+                             <span class="button__text">GİRİŞ YAP</span>
+                             <i class="button__icon fas fa-chevron-right"></i>
+                         </button>
+                     </form>
+                     <div class="social-login">
+                         <a asp-action="ForgotPassword">ŞİFREMİ UNUTTUM</a>
+                     </div>
+                 </div>
+                 <div class="screen__background">
+                     <span class="screen__background__shape screen__background__shape4"></span>
+                     <span class="screen__background__shape screen__background__shape3"></span>
+                     <span class="screen__background__shape screen__background__shape2"></span>
+                     <span class="screen__background__shape screen__background__shape1"></span>
+                 </div>
+             </div>
+
+         </div>
+     </div>
+ </body>
+
+ </html>
